@@ -16,9 +16,6 @@ if torch.cuda.is_available():
 # Load processor
 processor = AutoProcessor.from_pretrained(
     "MrLight/dse-qwen2-2b-mrl-v1", 
-    min_pixels=min_pixels, 
-    max_pixels=max_pixels,
-    trust_remote_code=True
 )
 
 # Load model with minimal configurations first
@@ -52,7 +49,7 @@ for query in queries:
         {
             'role': 'user',
             'content': [
-                {'type': 'image', 'image': Image.new('RGB', (28, 28)), 'resized_height':1 , 'resized_width':1}, # need a dummy image here for an easier process.
+                {'type': 'image', 'image': Image.new('RGB', (28, 28))}, # need a dummy image here for an easier process.
                 {'type': 'text', 'text': f'Query: {query}'},
             ]
         }
@@ -63,7 +60,7 @@ query_texts = [
     for msg in query_messages
 ]
 query_image_inputs, query_video_inputs = process_vision_info(query_messages)
-query_inputs = processor(text=query_texts, images=query_image_inputs, videos=query_video_inputs, padding='longest', return_tensors='pt').to('cuda:0')
+query_inputs = processor(text=query_texts, images=query_image_inputs, videos=query_video_inputs, padding='longest', return_tensors='pt').to(model.device)
 cache_position = torch.arange(0, len(query_texts))
 query_inputs = model.prepare_inputs_for_generation(**query_inputs, cache_position=cache_position, use_cache=False)
 with torch.no_grad():
@@ -114,7 +111,7 @@ doc_texts = [
     for msg in doc_messages
 ]
 doc_image_inputs, doc_video_inputs = process_vision_info(doc_messages)
-doc_inputs = processor(text=doc_texts, images=doc_image_inputs, videos=doc_video_inputs, padding='longest', return_tensors='pt').to('cuda:0')
+doc_inputs = processor(text=doc_texts, images=doc_image_inputs, videos=doc_video_inputs, padding='longest', return_tensors='pt').to(model.device)
 cache_position = torch.arange(0, len(doc_texts))
 doc_inputs = model.prepare_inputs_for_generation(**doc_inputs, cache_position=cache_position, use_cache=False)
 with torch.no_grad():

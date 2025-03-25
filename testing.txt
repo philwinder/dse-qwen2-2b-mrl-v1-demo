@@ -1,0 +1,25 @@
+Baseline
+Similarities for Query 1: [0.5078125  0.29296875]
+Similarities for Query 2: [0.38671875 0.4921875 ]
+Similarities for Query 3: [0.40429688 0.32421875]
+
+
+Remove min/max
+Similarities for Query 1: [0.5078125  0.29296875]
+Similarities for Query 2: [0.38671875 0.4921875 ]
+Similarities for Query 3: [0.40429688 0.32421875]
+
+Remove image size on request
+Similarities for Query 1: [0.5078125  0.29296875]
+Similarities for Query 2: [0.38671875 0.4921875 ]
+Similarities for Query 3: [0.40429688 0.32421875]
+
+Device map auto
+Similarities for Query 1: [0.5078125  0.29296875]
+Similarities for Query 2: [0.38671875 0.4921875 ]
+Similarities for Query 3: [0.40429688 0.32421875]
+
+Float16
+Similarities for Query 1: [0.50390625 0.29052734]
+Similarities for Query 2: [0.38671875 0.49072266]
+Similarities for Query 3: [0.40698242 0.3256836 ]
